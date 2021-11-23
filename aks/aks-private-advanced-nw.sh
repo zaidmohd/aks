@@ -29,12 +29,9 @@ az network vnet create \
     --subnet-prefix 192.168.1.0/24
 
 echo "Get AKS Subnet"
-$subnetid=az network vnet subnet list \
-    --resource-group $aksResourceGroup \
-    --vnet-name $vnetName \
-    --query "[0].id" --output tsv
+subnetid=$(az network vnet subnet show --resource-group $aksResourceGroup --vnet-name $vnetName --name $subnetName --query id -o tsv)
 
-echo "Get AKS Subnet"
+echo "Create AKS Cluster"
 az aks create \
     --resource-group $aksResourceGroup \
     --name $aksClusterName  \
@@ -44,4 +41,6 @@ az aks create \
     --vnet-subnet-id $subnetid \
     --docker-bridge-address 172.17.0.1/16 \
     --dns-service-ip 10.2.0.10 \
-    --service-cidr 10.2.0.0/24
+    --service-cidr 10.2.0.0/24 \
+    --enable-managed-identity \
+    --generate-ssh-keys
