@@ -1,4 +1,4 @@
-# Sample scripts and content
+# Scripts and content
 
 **Topics covered:**
 
