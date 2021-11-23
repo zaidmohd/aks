@@ -15,3 +15,8 @@ description: >
 ## Script Flow
 
 ## Content
+
+## Validate
+
+- Get AKS Credentials
+az aks get-credentials --resource-group $aksResourceGroup --name $aksClusterName
